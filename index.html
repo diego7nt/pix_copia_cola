@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiar Código PIX</title>
+    <script>
+        // Função para copiar o texto para a área de transferência
+        function copiarParaClipboard(texto) {
+            const textarea = document.createElement('textarea');
+            textarea.value = texto;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        // Função para obter o código PIX da URL
+        function obterCodigoPixDaUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('codigo_pix');
+        }
+
+        // Copiar o código PIX quando a página carregar
+        window.onload = function() {
+            const codigoPix = obterCodigoPixDaUrl();
+            if (codigoPix) {
+                copiarParaClipboard(codigoPix);
+                alert('Código PIX copiado para a área de transferência!');
+            } else {
+                alert('Código PIX não encontrado na URL.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>O código PIX foi copiado para a área de transferência!</h1>
+</body>
+</html>
